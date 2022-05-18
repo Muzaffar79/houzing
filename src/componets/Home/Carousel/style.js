@@ -9,6 +9,7 @@ position: relative;
 
 const Container = styled(Carousel)`
 width: 100%;
+height: fit-content;
 /* height: 570px; */
 `;
 
