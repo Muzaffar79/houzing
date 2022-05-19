@@ -1,5 +1,6 @@
 import Generic from '../pages/Generic'
 import Home from '../pages/Home'
+import Proporties from '../pages/Proporties'
 
 
 export const navbar =[
@@ -16,7 +17,7 @@ export const navbar =[
         id:2,
         title: 'Properties',
         path: '/properties',
-        Element: <Generic />,
+        Element: <Proporties/>,
         search: '?',
         hidden: false,
         private: false

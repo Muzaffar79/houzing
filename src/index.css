@@ -50,4 +50,13 @@ color: #0D263B;
     display: flex;
     justify-content: center;
 }
+
+.endToRight{
+    display: flex;
+    margin-left: auto;
+}
+
+.deleted{
+     text-decoration: line-through;
+}
  
