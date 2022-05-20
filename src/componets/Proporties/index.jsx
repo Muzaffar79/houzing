@@ -17,7 +17,7 @@ export const Proporties = () => {
           setData(res?.dataList[0]);  
         }
     })
-    console.log(data);
+  console.log(data);
   return (
     <Container>
           {/* <Filter /> */}
@@ -30,6 +30,7 @@ export const Proporties = () => {
         {
           data.map((value)=>{
               return <Card info={value}/>
+              
           })  
         }
         </Wrapper>

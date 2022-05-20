@@ -9,6 +9,7 @@ import { ReactComponent as resize} from '../../assets/icons/resize.svg';
 
 const Container = styled.div`
  display: flex;
+ flex-grow: 10;
  flex-direction:column;
  max-width: 380px;
  min-width: 280px;
@@ -24,6 +25,8 @@ const Img = styled.img`
 min-height: 220px;
 max-height: 220px;
 width: 100%;
+max-width: 380px;
+ min-width: 280px;
 `;
 
 const InfoWrapper = styled.div`
@@ -39,6 +42,7 @@ const Info = styled.div`
 display: flex;
 justify-content: space-between;
 padding: 16px 0;
+
 `;
 
 Info.Detail = styled.div`
@@ -79,8 +83,8 @@ const Footer = styled.div`
 display: flex;   
 align-items: center;
 border-top: 1px solid #e6e9ec;
-padding: 0 20px;
 height: 100%;
+padding: 0 20px;
 `;
 
 const User = styled.div`
