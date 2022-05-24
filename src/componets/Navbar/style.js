@@ -11,6 +11,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 background: var(--primaryColor);
+padding: 0 130px;
 
 -webkit-touch-callout: none;
 -webkit-user-select: none;

@@ -1,18 +1,46 @@
+
 import React from 'react'
 import { Advandced, Container, Icon, Section, Wrapper } from './style'
 import {Button, Input} from '../Generic'
 import { Popover } from 'antd'
+import { useNavigate} from 'react-router-dom'
+import useSearch from '../../hooks/useSearch';
+import UseReplace from '../../hooks/usePerlace'
+
+
 
 export const Filter = () => {
+  const navigate = useNavigate();
+  const query = useSearch();
+ 
+
+  const onChange =({target})=>{
+   const {value, name} = target;
+   navigate(`${UseReplace(name, value)}`);
+ 
+  }
 
 const advandcedSearch =(
   <Advandced>
     <Advandced.Title>Address</Advandced.Title>
     <Section>
-      <Input mr={20} placeholder={'Country'}/>
-      <Input mr={20} placeholder={'Region'}/>
-      <Input mr={20} placeholder={'City'}/>
-      <Input mr={20} placeholder={'Zip Code'}/>
+      <Input 
+      onChange={onChange}
+      name="country" 
+      defaultValue={query.get('country')}
+      placeholder={'Country'}/>
+      <Input
+      onChange={onChange} 
+      name="region" 
+      defaultValue={query.get('region')}
+      placeholder={'Region'}/>
+      <Input 
+      onChange={onChange}
+       name="city" 
+       defaultValue={query.get('city')}
+       placeholder={'City'}
+       />
+      <Input  placeholder={'Zip Code'}/>
     </Section>
     <Advandced.Title>Apartment info</Advandced.Title>
     <Section>
@@ -26,9 +54,9 @@ const advandcedSearch =(
     <Input placeholder={'Max price'}/>
     </Section>
     <Section>
-    <Button width='131px' ml={20} type='secondary'>
+    <Button width='131px'  type='secondary'>
      Cancel</Button>
-    <Button width='131px' ml={20} type='primary'>
+    <Button width='131px'  type='primary'>
      Search</Button>
     </Section>
   </Advandced>

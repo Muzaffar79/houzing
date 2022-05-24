@@ -6,10 +6,15 @@ flex-direction: column;
 align-items: center;
 `;
 const Wrapper = styled.div`
-display: flex;
+/* display: flex;
  flex-wrap: wrap;
 max-width: 1440px;
-gap: 20px;
+gap: 20px; */
+display: grid;
+grid-gap: 20px;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+width: 100%;
+max-width: var(--width);
 padding: 0 130px;
 `;
 
