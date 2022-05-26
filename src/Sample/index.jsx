@@ -4,7 +4,7 @@ import { Container } from './style'
 
 export const Signin = () => {
   return (
-    <div>Signin</div>
+    <Container>Signup</Container>
   )
 }
 
