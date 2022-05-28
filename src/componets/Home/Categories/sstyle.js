@@ -58,4 +58,14 @@ padding-left: 0;
 padding-right: 10px;
 `;
 
-export {Container, Wrapper, Carousel, ArrowRight, ArrowLeft}
+const CategoryWrapper = styled.div`
+display: flex;
+width: 280px;
+background: linear-gradient(0deg rgba(0,0,0, 0.65),rgba(0,0,0, 0.65),) url(.jpg);
+box-shadow: 0px 20px 38px rgba(0,0,0, 0.6), 0px 8px 15px rgba(0,0,0, 0.6);
+border-radius: 3px;
+transform: matrix(-1,0,0,1,0,0);
+
+`;
+
+export {Container, Wrapper, Carousel, ArrowRight, ArrowLeft,CategoryWrapper}
