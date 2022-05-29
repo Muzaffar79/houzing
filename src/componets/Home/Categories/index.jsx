@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { ArrowLeft, ArrowRight, Carousel, CategoryWrapper, Container, Deteils, Img, Wrapper } from './sstyle'
+import {CategoryWrapper, Container, Deteils, Img, Wrapper } from './sstyle'
 import AliceCarousel from 'react-alice-carousel'
 import { useQuery } from 'react-query'
 import uy from '../../../assets/img/uy3.png'
@@ -55,16 +55,7 @@ export const Recommended = () => {
       <Wrapper>
         <AliceCarousel arrow={false} ref={slider} autoWidth items={list} />
       </Wrapper>
-      {/* <Wrapper>
-        <Carousel>
-        <ArrowRight onClick={()=>slider.current?.slidePrev()}>
-        &lang;
-        </ArrowRight>
-       <ArrowLeft onClick={()=>slider.current?.slideNext()}>
-        &lang;
-        </ArrowLeft>
-        </Carousel>
-      </Wrapper> */}
+    
     </Container>
   )
 }
