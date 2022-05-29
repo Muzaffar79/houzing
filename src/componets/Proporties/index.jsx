@@ -4,16 +4,16 @@ import Filter from '../Filter/'
 import Card from '../Card'
 import { Container, Total, Wrapper } from './style'
 import { useQuery } from 'react-query'
-import { useLocation } from 'react-router-dom'
+import { useLocation,useNavigate } from 'react-router-dom'
 
-
+ 
 
 const {REACT_APP_BASE_URL: url} = process.env;
 
 export const Proporties = () => {
       const [data, setData] = useState([])
       const {search} = useLocation();
-     
+       const navigate = useNavigate()
 
     useQuery(['get data', search],
     ()=>{
@@ -23,7 +23,9 @@ export const Proporties = () => {
           setData(res?.dataList[0] || []);  
         }
     })
-  console.log(data);
+   const onSelect =(id)=>{
+    navigate(`/properties/:${id}`)
+   }
   return (
     <Container>
           <Filter />
@@ -35,7 +37,10 @@ export const Proporties = () => {
         <Wrapper>
         {
           data?.map((value)=>{
-              return <Card info={value}/>
+              return <Card 
+              key={value.id} 
+              onClick={()=>onSelect(value.id)} 
+              info={value}/>
               
           })  
         }

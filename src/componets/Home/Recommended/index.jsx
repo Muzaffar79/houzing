@@ -22,7 +22,7 @@ import AliceCarousel from 'react-alice-carousel'
       </div>  
       <Wrapper>
         <Carousel>
-        <AliceCarousel ref={slider} autoWidth items={items} />
+        <AliceCarousel arrow={false} ref={slider} autoWidth items={items} />
         <ArrowRight onClick={()=>slider.current?.slidePrev()}>
         &lang;
         </ArrowRight>

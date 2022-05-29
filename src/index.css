@@ -59,4 +59,9 @@ color: #0D263B;
 .deleted{
      text-decoration: line-through;
 }
+
+.alice-carousel__stage {
+    display: flex;
+    gap: 20px;
+}
  

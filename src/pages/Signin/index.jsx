@@ -1,7 +1,7 @@
 import React, {useState}from 'react'
 import { Container, Wrapper } from './style'
 import { Input, Button } from '../../componets/Generic'
-import {useQuery, useMutation} from 'react-query'
+import {useMutation} from 'react-query'
 import { useNavigate } from 'react-router-dom';
 
 const {REACT_APP_BASE_URL: url} = process.env;
@@ -19,16 +19,16 @@ const navigate = useNavigate()
    headers:{
      'Content-Type' : 'application/json',
    },
-   body: JSON.stringify({email, passwords: pw}),
+   body: JSON.stringify({email, password: pw}),
   }).then(res=>res.json());
   });
 
-
+   
   const onSubmit = ()=>{
     mutate('hey', {
     onSuccess:(res)=>{
     localStorage.setItem('token', res?.authenticationToken);
-    if (res?.authenticationToken)  navigate('/home');
+     if (res?.authenticationToken)  navigate('/home');
   },
   onError:(res)=>{
     console.log(res, 'error');
@@ -45,7 +45,7 @@ const navigate = useNavigate()
       value={email} placeholder={'Email'} />
       <Input 
       onChange={({target})=>setPw(target?.value)} 
-      value={pw} placeholder={'passwords'} />
+      value={pw} placeholder={'password'} />
       <Button onClick={onSubmit} type={'secondary'}>Login</Button>
       </Wrapper>
     </Container>

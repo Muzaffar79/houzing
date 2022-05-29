@@ -3,9 +3,9 @@ import { Container, Img, Info, InfoWrapper, Icons, Footer, User } from './style'
 import nobackroundimg from '../../assets/img/noimg.jpg'
 import nouser from '../../assets/img/nouser.jpg'
 
-export const Card = ({ info, mr }) => {
+export const Card = ({ info, mr, onClick }) => {
   return (
-    <Container mr={mr}>
+    <Container mr={mr} onClick={onClick}>
       <Img src={info?.attachments[0]?.imgPath || nobackroundimg} />
       <InfoWrapper>
         <User>

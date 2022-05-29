@@ -15,6 +15,7 @@ export const Input = ({
     onChange,
     placeholder,
     name,
+    value,
     defaultValue 
 }) => {
   return (
@@ -29,6 +30,7 @@ export const Input = ({
        height={height}
        onClick={onClick}
        name={name}
+       value={value}
        defaultValue={defaultValue}
       />
     </Wrapper>

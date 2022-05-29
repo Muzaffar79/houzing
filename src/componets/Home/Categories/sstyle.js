@@ -12,6 +12,7 @@ const Wrapper = styled.div`
  width: 100%;
  position: relative;
  margin-top: 32px;
+ padding: 0 130px;
 /* width: 1440px; */
 `; 
 
@@ -60,12 +61,44 @@ padding-right: 10px;
 
 const CategoryWrapper = styled.div`
 display: flex;
+position: relative;
 width: 280px;
-background: linear-gradient(0deg rgba(0,0,0, 0.65),rgba(0,0,0, 0.65),) url(.jpg);
+max-width: 280px;
+height: 350px;
+/* background: linear-gradient(0deg rgba(0,0,0, 0.65),rgba(0,0,0, 0.65),) url(.jpg); */
 box-shadow: 0px 20px 38px rgba(0,0,0, 0.6), 0px 8px 15px rgba(0,0,0, 0.6);
-border-radius: 3px;
-transform: matrix(-1,0,0,1,0,0);
+border-radius: 5px;
+cursor:pointer;
+
+ 
+`;
+
+const Deteils = styled.div`
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFFFFF;
+`;
+
+const Img = styled.img`
+width: 280px;
+border-radius: 5px;
 
 `;
 
-export {Container, Wrapper, Carousel, ArrowRight, ArrowLeft,CategoryWrapper}
+export {Container, 
+       Wrapper, 
+       Carousel, 
+       ArrowRight, 
+       ArrowLeft,
+       CategoryWrapper,
+       Deteils,
+       Img
+    }
