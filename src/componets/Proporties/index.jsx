@@ -20,7 +20,7 @@ export const Proporties = () => {
      return fetch(`${url}/v1/houses/list${search}`).then((res)=>res.json())
     }, {
         onSuccess: (res)=>{
-          setData(res?.dataList[0] || []);  
+          setData(res?.data || []);  
         }
     })
    const onSelect =(id)=>{

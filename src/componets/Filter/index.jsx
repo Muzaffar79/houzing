@@ -30,7 +30,7 @@ export const Filter = () => {
 
   useQuery(
     '', () => {
-    return fetch(`${url}/v1/categories`, {
+    return fetch(`${url}/v1/categories/list`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -39,8 +39,8 @@ export const Filter = () => {
     {
       onSuccess: (res) => {
      
-        setList(res?.dataList?.[0] || [])
-
+        setList(res?.dataList || [])
+ 
       }
     }
   );
