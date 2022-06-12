@@ -11,6 +11,7 @@ import { useQuery } from 'react-query'
 
 export const Filter = () => {
   const [list, setList] = useState([])
+
   const navigate = useNavigate();
   const query = useSearch();
  
@@ -30,17 +31,17 @@ export const Filter = () => {
 
   useQuery(
     '', () => {
-    return fetch(`${url}/v1/categories/list`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    }).then((res) => res.json());
+    return fetch(`${url}/v1/categories/list`,{
+    // headers: {
+    //   Authorization: `Bearer${localStorage.getItem('token')}`
+    // }
+  }).then((res) => res.json());
   },
     {
       onSuccess: (res) => {
+    //  let response = res?.data?.map((value)=>value.name);
+        setList(res?.data || [])
      
-        setList(res?.dataList || [])
- 
       }
     }
   );
@@ -105,8 +106,9 @@ const advandcedSearch =(
     <Input value={state.maxPrice} placeholder={'Max price'}/>
     <select name="" id="" defaultValue={query.get('category_id')} onChange={onSelect}>
       {
-        list.map((value, index)=>{
-          return <option key={index} value={index + 1}>{value}</option>
+        list.map((value)=>{
+       
+          return <option key={value.id} value={value.id}>{value.name}</option>
         })
       }
     </select>

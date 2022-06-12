@@ -23,7 +23,7 @@ margin: 70px 0 16px 0;
 max-width: 1440px;
 width: 100%;
 text-align: start;
-padding: 0 130px;
+padding: 0 10px;
 `;
 
 

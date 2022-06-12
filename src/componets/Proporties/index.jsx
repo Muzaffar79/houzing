@@ -5,24 +5,26 @@ import Card from '../Card'
 import { Container, Total, Wrapper } from './style'
 import { useQuery } from 'react-query'
 import { useLocation,useNavigate } from 'react-router-dom'
+import { useHttp } from '../../hooks/useHttp'
 
  
 
-const {REACT_APP_BASE_URL: url} = process.env;
 
 export const Proporties = () => {
       const [data, setData] = useState([])
       const {search} = useLocation();
-       const navigate = useNavigate()
+       const navigate = useNavigate();
+       const {request} = useHttp();
 
     useQuery(['get data', search],
-    ()=>{
-     return fetch(`${url}/v1/houses/list${search}`).then((res)=>res.json())
-    }, {
+    ()=> request({url:`/v1/houses/list ${search}`}),
+     {
         onSuccess: (res)=>{
+      
           setData(res?.data || []);  
-        }
-    })
+          },
+          }
+    )
    const onSelect =(id)=>{
     navigate(`/properties/:${id}`)
    }

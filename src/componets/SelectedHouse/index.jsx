@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useQuery } from 'react-query'
 
 import { useParams } from 'react-router-dom'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 import { Container } from './style'
 
@@ -19,16 +19,18 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 41.311081,
-  lng: 69.240562
+  lat: state?.location?.latitude,
+  lng: state?.location?.longitude
 };
 
 const {REACT_APP_BASE_URL: url} = process.env;
-useQuery('get data',()=>{
+useQuery(
+  'get data',
+()=>{
   return fetch(`${url}/v1/houses/${id.replace(':', '')}`,{
     method: 'GET',
     headers:{
-    'Authorization': `Bearer ${localStorage.getItem('token')}` 
+    Authorization: `Bearer ${localStorage.getItem('token')}` 
     }
   }).then(res=>res.json());
 },{
@@ -47,14 +49,10 @@ const { isLoaded } = useJsApiLoader({
     <Container>
       { isLoaded && (
         <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={5}
-       
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
+        mapContainerStyle={containerStyle} center={center} zoom={7}>
+        {state?.location?.latitude && state?.location?.longitude &&(
+          <Marker position={center} />)}  
+        </GoogleMap>
       )}
     
     </Container>

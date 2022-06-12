@@ -9,4 +9,4 @@ if (!value) {
 return url.search;
 };
 
-export default useReplace
+export default useReplace;

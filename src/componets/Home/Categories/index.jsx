@@ -4,8 +4,7 @@ import AliceCarousel from 'react-alice-carousel'
 import { useQuery } from 'react-query'
 import uy from '../../../assets/img/uy3.png'
 import { useNavigate } from 'react-router-dom'
-const { REACT_APP_BASE_URL: url } = process.env;
-
+import { useHttp } from '../../../hooks/useHttp'
 
 const Category = ({ value}) => {
     const navigate = useNavigate();
@@ -15,28 +14,25 @@ const Category = ({ value}) => {
 
   return <CategoryWrapper onClick={goto}>
     <Img src={uy} alt='tet' />
-    <Deteils>{value.name}</Deteils>
+    <Deteils>{value?.name}</Deteils>
   </CategoryWrapper>
 }
 
 export const Recommended = () => {
   const [list, setList] = useState([])
-
   const slider = useRef();
+  const {request} = useHttp();
 
-  useQuery('', () => {
-    return fetch(`${url}/v1/categories/list`,).then((res) => res.json());
-  },
+  useQuery(
+    '',
+     () => request({url: '/v1/categories/list'}),
     {
       onSuccess: (res) => {
-        let response = res?.data.map((value) => (
-
-          <Category key={value.id} value={value}   />
-
-        ))
-        setList(response || [])
-
-      }
+       let response = res?.data?.map((value) => (
+          <Category key={value.id} value={value} />
+        ));
+       setList(response || []);
+      }, 
     }
   );
 
