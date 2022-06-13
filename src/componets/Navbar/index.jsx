@@ -15,7 +15,7 @@ export const Navbar = () => {
           <Logo.Title>Houzing</Logo.Title>
         </Logo>  
       <NavbarBody>
-        {navbar.map(({title,id,path, hidden})=>{
+       {navbar.map(({title,id,path, hidden})=>{
           return (
             !hidden && (
           <Link key={id} to={path}>
@@ -24,8 +24,21 @@ export const Navbar = () => {
           )
           );
         })}  
-      </NavbarBody>    
-     <Button onClick={()=> navigate('/signin')} width={'120px'}>Login</Button>
+      </NavbarBody>
+      {localStorage.getItem('token') ? (
+        <>
+        <h1 onClick={()=> navigate('/myproperties')}>ProFile</h1>
+     <Button 
+     onClick={()=>{ 
+     localStorage.clear();
+      navigate('/home');
+    }}
+     width={'120px'}>
+      Log Out</Button>
+      </>
+      ):(
+        <Button onClick={()=> navigate('/signin')} width={'120px'}>Login</Button>
+      )}
         </NavbarWrapper>
       </Container>
        <Outlet />

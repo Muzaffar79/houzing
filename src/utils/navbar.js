@@ -3,6 +3,8 @@ import Home from '../pages/Home'
 import Proporties from '../pages/Proporties'
 import SelectedHous from '../pages/SelectedHouse'
 import Signin from '../pages/Signin'
+import MyProperties from '../pages/MyProperties'
+import AddNew from '../pages/AddNew'
 
 
 export const navbar =[
@@ -61,4 +63,25 @@ export const navbar =[
         hidden: true,
         private: false
     },
+    {
+        id:7,
+        title: 'My Properties',
+        path: '/myProperties',
+        Element: <MyProperties />,
+        search: '?',
+        useParams: true,
+        hidden: true,
+        private: false
+    },
+    {
+        id:7,
+        title: 'Add New',
+        path: '/properties/addnew',
+        Element: <AddNew />,
+        search: '?',
+        useParams: true,
+        hidden: true,
+        private: false
+    },
+
 ]

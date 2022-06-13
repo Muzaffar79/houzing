@@ -28,7 +28,7 @@ const navigate = useNavigate()
     mutate('hey', {
     onSuccess:(res)=>{
     localStorage.setItem('token', res?.authenticationToken);
-     if (res?.authenticationToken)  navigate('/home');
+     if (res?.authenticationToken)  navigate('/myproperties');
   },
   onError:(res)=>{
     console.log(res, 'error');
@@ -46,7 +46,7 @@ const navigate = useNavigate()
       <Input 
       onChange={({target})=>setPw(target?.value)} 
       value={pw} placeholder={'password'} />
-      <Button onClick={onSubmit} type={'secondary'}>Login</Button>
+      <Button onClick={onSubmit} type={'primary'}>Login</Button>
       </Wrapper>
     </Container>
   )
