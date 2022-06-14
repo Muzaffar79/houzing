@@ -16,7 +16,8 @@ export const Input = ({
     placeholder,
     name,
     value,
-    defaultValue 
+    defaultValue,
+     
 }) => {
   return (
     <Wrapper mr={mr} ml={ml} mb={mb} mt={mt}>

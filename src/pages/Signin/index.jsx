@@ -25,17 +25,21 @@ const navigate = useNavigate()
 
    
   const onSubmit = ()=>{
-    mutate('hey', {
-    onSuccess:(res)=>{
-    localStorage.setItem('token', res?.authenticationToken);
-     if (res?.authenticationToken)  navigate('/myproperties');
-  },
-  onError:(res)=>{
-    console.log(res, 'error');
-
-  }, 
-  });
-  };
+    if (email) {
+      mutate('hey', {
+      onSuccess:(res)=>{
+      localStorage.setItem('token', res?.authenticationToken);
+       if (res?.authenticationToken)  navigate('/myproperties');
+    },
+    onError:(res)=>{
+      console.log(res, 'error');
+  
+    }, 
+    });
+    }else{
+      alert('Nado zapolnit pole')
+    }
+     }
   return (
     <Container>
       <div className="title">Signin</div>

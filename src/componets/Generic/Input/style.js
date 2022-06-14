@@ -22,6 +22,7 @@ const getType = (type) =>{
 }
 
 const Container = styled.input`
+
 display: flex;
 
 /* font-family: 'Montserrat';
