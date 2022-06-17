@@ -14,7 +14,9 @@ export const useHttp =()=>{
             headers['Authorization']= `Bearer ${localStorage.getItem('token')}`
             headers['Content-Type']= `application/json`;
         }
-        let bd = await method === 'POST' ? JSON.stringify(body): body 
+        let bd = await method === 'POST' || await method === 'PUT' 
+        ? JSON.stringify(body)
+        : body; 
         let res = await fetch(`${REACT_APP_BASE_URL}${url}`,{
             method,
             body: bd,

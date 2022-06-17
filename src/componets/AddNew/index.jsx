@@ -3,12 +3,33 @@ import { Container, Section, Wrapper } from './style';
 import {Input, Button} from '../Generic'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import {useHttp} from '../../hooks/useHttp';
-import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { message } from 'antd';
 
 
 export const AddNew = () => {
+  const {id} = useParams();
+  console.log(id);
+const [data, setData] = useState({
+
+})
+
   const { request } = useHttp();
+
+
+  useQuery(
+    'getSingle Item',
+     ()=>{
+   return id && request({ url: `/v1/houses/${id.replace(':', '')}`, token: true });
+  }, 
+   {
+    onSuccess: (res)=>{
+        setData(res?.data)
+   }, 
+   }
+  );
+
   const navigate = useNavigate()
 
    const [center, setCenter] = useState({
@@ -27,7 +48,7 @@ export const AddNew = () => {
 
 
   const onClickMap = (e)=>{
-    console.log(e?.latLng?.lat());
+
   setCenter({
     lat: e?.latLng?.lat(), 
     lng: e?.latLng?.lng(), 
@@ -92,23 +113,48 @@ export const AddNew = () => {
       zipCode: '123456'
     
   }}))
+  const {mutate: update} = useMutation((id)=>{
+    return id && request({url: `/v1/houses/${id.replace(':', '')}`, method: 'PUT', token: true, body: data}) 
+  })
 
 const onSubmit = ()=>{
-  mutate('',{
-    onSuccess:(res)=>{
-      console.log(res, 'fdfdfd');
-     if (res?.success) {
-       navigate('/myproperties')
-     }
-    }
+  if (id) {
+    update(id, {
+      onSuccess: res =>{
+      if (res?.success) {
+        message.info('update')
+        navigate('/myproperties')
+      }
+      }
+    })
+  }else{
+    mutate('',{
+      onSuccess:(res)=>{
+      
+       if (res?.success) {
+         navigate('/myproperties')
+       }
+      }
+    })
+  }
+}
+
+
+
+const onChange = ({target:{name, value}})=>{
+  setData({
+    ...data,
+    [name]: value
+
   })
 }
+
   return (
     <Container>
       <Section>
         <div className='subtitle'>Contact Information</div>
         <Wrapper>
-        <Input placeholder={'Property Title'}/>
+        <Input name='address' onChange={onChange} value={data?.address} placeholder={'Property Title'}/>
         <Input placeholder={'Category'}/>
         </Wrapper>
        <Wrapper>
@@ -118,9 +164,9 @@ const onSubmit = ()=>{
       <Section>
         <div className='subtitle'>Additional</div>
         <Wrapper>
-          <Input placeholder={'bath'} />
-          <Input placeholder={'bed'} />
-          <Input placeholder={'garage'} />
+          <Input value={data?.houseDetails?.bath} placeholder={'bath'} />
+          <Input value={data?.houseDetails?.bed} placeholder={'bed'} />
+          <Input value={data?.houseDetails?.garage} placeholder={'garage'} />
         </Wrapper>
         <Wrapper>
           <Input placeholder={'year bild'} />
