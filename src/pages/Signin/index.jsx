@@ -36,7 +36,8 @@ const navigate = useNavigate()
   
     }, 
     });
-    }else{
+    }
+    else{
       alert('Nado zapolnit pole')
     }
      }

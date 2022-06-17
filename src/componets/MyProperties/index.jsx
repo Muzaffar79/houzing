@@ -31,7 +31,7 @@ export const MyProperties = () => {
    <Container>
        {
       data?.map((value)=>{
-        return <Card info={value}/>
+        return <Card key={value.id} info={value}/>
       })}
     </Container>
    </Wrapper>
