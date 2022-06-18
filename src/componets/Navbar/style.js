@@ -46,11 +46,6 @@ color: white;
 }
 `;
 
-// const Body = styled.div`
-// display: flex;
-// width: 100%;
-// `;
-
 const Link = styled(NavLink)`
 color: white;
 text-decoration: none;

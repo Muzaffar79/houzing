@@ -13,10 +13,9 @@ import { useHttp } from '../../hooks/useHttp'
 export const Proporties = () => {
       const [data, setData] = useState([])
       const {search} = useLocation();
-      console.log(useLocation(), 'fff'); 
        const navigate = useNavigate();
        const {request} = useHttp();
-
+  
     useQuery(['get data', search],
     ()=> request({url:`/v1/houses/list${search}`}),
      {

@@ -1,18 +1,31 @@
-  import React, { useRef } from 'react'
+  import React, { useRef, useState } from 'react'
   import Card from '../../Card'
 import { ArrowLeft, ArrowRight, Carousel, Container, Wrapper } from './sstyle'
 import AliceCarousel from 'react-alice-carousel'
+import { useQuery } from 'react-query'
+import { useHttp } from '../../../hooks/useHttp'
 
   
   export const Recommended = () => {
-    const items = [
-    <Card mr={20}/>,  
-    <Card mr={20}/>,
-    <Card mr={20}/>,
-    <Card mr={20}/>,
-    <Card mr={20}/>,
-    
-  ]
+  const [data, setData] = useState([]);
+  const {request} = useHttp();
+
+    useQuery('get data', 
+    ()=> request({url:`/v1/houses/list`}),
+    {
+        onSuccess: (res)=>{
+         setData(res?.data || []);  
+          },
+          }
+    )
+    const items = data.map((value)=>(
+     <Card 
+     key={value.id}
+     info={value}
+     />
+    )
+    )
+
   const slider = useRef()
     return (
       <Container>
@@ -22,7 +35,7 @@ import AliceCarousel from 'react-alice-carousel'
       </div>  
       <Wrapper>
         <Carousel>
-        <AliceCarousel arrow={false} ref={slider} autoWidth items={items} />
+        <AliceCarousel arrow={false} ref={slider} autoWidth autoPlay items={items} />
         <ArrowRight onClick={()=>slider.current?.slidePrev()}>
         &lang;
         </ArrowRight>

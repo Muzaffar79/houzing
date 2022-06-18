@@ -15,7 +15,7 @@ export const MyProperties = () => {
 
   const {data, refetch} = useQuery('getMyProperties',
  ()=>{
-  console.log(data, "uyyyyy");
+
     return request({url:'/v1/houses/me', token: true });
   });
 
