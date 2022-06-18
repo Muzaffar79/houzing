@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useMutation, useQuery } from 'react-query';
 import { useHttp } from '../../hooks/useHttp'
-import { Container, Section, Wrapper, Table, Tr, Th, Td, Icons } from './style'
-
+import { Container, Section, Wrapper,Icons, Header, Card, Img, Title, Info, Status, Date, Action, View } from './style'
+import nobackroundimg from '../../assets/img/noimg.jpg'
 import { Button } from '../Generic';
 import { useNavigate } from 'react-router-dom';
 import { message, Popconfirm } from 'antd';
@@ -15,6 +15,7 @@ export const MyProperties = () => {
 
   const {data, refetch} = useQuery('getMyProperties',
  ()=>{
+  console.log(data, "uyyyyy");
     return request({url:'/v1/houses/me', token: true });
   });
 
@@ -37,48 +38,59 @@ export const MyProperties = () => {
   return (
    <Wrapper>
     <Section>
-    <div className="title">Properties</div>
+    <div className="title">My Properties</div>
     <Button onClick={()=>navigate('/properties/addnew')} type={'primary'} width={'131px'} >Add New</Button>
     </Section>
-   <Table>
-    <thead>
-    <Tr>
-      <Th>Listing Title</Th>
-      <Th>Published Date</Th>
-      <Th>Status</Th>
-      <Th>View</Th>
-      <Th>Action</Th>
-    </Tr>
-    </thead>
-    <tbody>
+    <Container>
+      <Header>
+        <Header.Title className='subtitle' fl={4} ta={'start'}>Listing Title</Header.Title>
+        <Header.Title className='subtitle'fl={2}>Date Published</Header.Title>
+        <Header.Title className='subtitle'>Status</Header.Title>
+        <Header.Title className='subtitle'>View</Header.Title>
+        <Header.Title className='subtitle'>Action</Header.Title>
+       </Header>
+       <Card>
        {
-      data?.data?.map((value)=>{
-        return (
-          <Tr key={value.id}>
-            <Td>{value?.address}</Td>
-            <Td>{new Date().getFullYear()}</Td>
-            <Td>{value?.status? 'Sotilmadi' : 'Sotildi'}</Td>
-            <Td>12345</Td>
-            <Td>
-              <Container>
-                <Icons.Edit onClick={()=>navigate(`/properties/addnew/:${value.id}`)} />
+         data?.data?.map((value)=>(
+          <Card.Wrapper>
+            <Title>
+          <Img src={value?.attachments[0]?.imgPath || nobackroundimg }/>
+          <Info >
+            <div>
+            <div  className="subtitle">{value?.address}</div>
+            <div  className="description">{value?.description}</div>
+            </div>
+           <div  className="subtitle">{`$${value?.price}/mo`}</div>
+          </Info>
+          <Title.Status>{value?.status? 'Sotiladi' : 'Sotildi'}</Title.Status>
+         </Title>
+         <Date>
+           <div className='description'>30 December 2022</div>
+         </Date>
+         <Status>
+           <div className='description'>Pending</div>
+         </Status>
+         <View>
+           <div className='description'>5933</div>
+
+         </View>
+         <Action>
+         <Icons.Edit onClick={()=>navigate(`/properties/addnew/:${value.id}`)} />
           <Popconfirm
                title="Uyni o'chirmoqchimiz"
                onConfirm={()=>confirm(value?.id)}
-              //  onCancel={cancel}
-              //  okText="Yes"
-              //  cancelText="No"
-  >
+              >
              <Icons.Trash/>
        </Popconfirm>
-              </Container>
-            </Td>
-          </Tr>
-        )
-      })}
-    </tbody>
-    </Table>
-   </Wrapper>
+         </Action>
+
+       </Card.Wrapper>
+            ))
+         }
+       </Card>
+    </Container>
+
+    </Wrapper>
   );
 };
 

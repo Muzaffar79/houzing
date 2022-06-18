@@ -10,7 +10,7 @@ import { message } from 'antd';
 
 export const AddNew = () => {
   const {id} = useParams();
-  console.log(id);
+
 const [data, setData] = useState({
 
 })
@@ -42,7 +42,8 @@ const [data, setData] = useState({
   };
 
   const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
+    id: 'add-houses',
+    version: 'add-house',
     googleMapsApiKey: 'AIzaSyAkkKvMyf8Tk3Q8s7MWXin6njbtjIjq2S4'
   })
 
@@ -61,14 +62,14 @@ const [data, setData] = useState({
     method: 'POST', 
     token: true,
     body:{
-      address: 'Namangan Square',
+      address: data?.address,
       attachments: [
         {
           imgPath: 'https://namangansquare.com/wp-content/uploads/2020/05/nsq-apartments-img-80.jpg'
         }
       ],
       categoryId: 0,
-      city: 'Namangan',
+      city: data.city || '',
       componentsDto: {
         additional: 'string',
         airCondition: true,
@@ -78,8 +79,8 @@ const [data, setData] = useState({
         internet: true,
         tv: true
       },
-      country: 'Uzbekistan',
-      description: 'yular',
+      country: data?.country || '',
+      description: data?.description || '',
       favorite: true,
       homeAmenitiesDto: {
         additional: 'string',
@@ -94,20 +95,20 @@ const [data, setData] = useState({
         superMarket: true
       },
       houseDetails: {
-        area: 10,
-        bath: 20,
-        beds: 20,
-        garage: 10,
-        room: 10,
-        yearBuilt: 2021
+        area: data?.area || 0,
+        bath: data?.bath || 0,
+        beds: data?.beds || 0,
+        garage: data?.garage || 0,
+        room: data?.room || 0,
+        yearBuild: data?.yearBuild ||0
       },
       locations: {
         latitude: center?.lat,
         longitude: center?.lng
       },
       name: 'string',
-      price: 0,
-      region: 'Namangan',
+      price: data?.price || 0,
+      region: data?.region || ' ',
       salePrice: 0,
       status: true,
       zipCode: '123456'
@@ -155,37 +156,37 @@ const onChange = ({target:{name, value}})=>{
         <div className='subtitle'>Contact Information</div>
         <Wrapper>
         <Input name='address' onChange={onChange} value={data?.address} placeholder={'Property Title'}/>
-        <Input placeholder={'Category'}/>
+        <Input name='category' onChange={onChange} value={data?.category} placeholder={'Category'}/>
         </Wrapper>
        <Wrapper>
-        <Input placeholder={'Property Description'}/>
+        <Input name='description' onChange={onChange} value={data?.description} placeholder={'Property Description'}/>
        </Wrapper>
       </Section>
       <Section>
         <div className='subtitle'>Additional</div>
         <Wrapper>
-          <Input value={data?.houseDetails?.bath} placeholder={'bath'} />
-          <Input value={data?.houseDetails?.bed} placeholder={'bed'} />
-          <Input value={data?.houseDetails?.garage} placeholder={'garage'} />
+          <Input name='bath' value={data?.houseDetails?.bath} placeholder={'bath'} />
+          <Input name='bed' value={data?.houseDetails?.bed} placeholder={'bed'} />
+          <Input name= 'garage' value={data?.houseDetails?.garage} placeholder={'garage'} />
         </Wrapper>
         <Wrapper>
-          <Input placeholder={'year bild'} />
+          <Input name='yearBuild' onChange={onChange} value={data?.yearBuild} placeholder={'year bild'} />
           <Input placeholder={'Home area'} />
-          <Input placeholder={'Rooms'} />
+          <Input name='room' onChange={onChange} value={data?.room}  placeholder={'Rooms'} />
         </Wrapper>
       </Section>
       <Section>
         <div className='subtitle'>Price</div>
         <Wrapper>
-          <Input placeholder={'Price'}/>
+          <Input name='price' onChange={onChange} value={data?.price} placeholder={'Price'}/>
           <Input placeholder={' Sale Price'}/>
         </Wrapper>
       </Section>
       <Section>
         <div className='subtitle'>Location</div>
         <Wrapper>
-         <Input placeholder={'Region'}/>
-         <Input placeholder={'Address'}/>
+         <Input name='region' onChange={onChange} value={data?.region} placeholder={'Region'}/>
+         <Input name='address' onChange={onChange} value={data?.address}  placeholder={'Address'}/>
         </Wrapper>
         <Wrapper>
           { isLoaded && (
